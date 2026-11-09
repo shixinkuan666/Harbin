@@ -1,0 +1,558 @@
+/* ===== 冰城手记 · 深冰蓝网格版 ===== */
+
+:root {
+    --ink: #08131a;
+    --ink-2: #0e2029;
+    --ink-3: #16303c;
+    --text: #e9f1f6;
+    --muted: #8ba3b0;
+    --glacier: #6ec1dd;
+    --line: rgba(233, 241, 246, 0.16);
+    --card: #0b1a23;
+}
+
+[data-theme="light"] {
+    --ink: #edf3f7;
+    --ink-2: #e2ecf1;
+    --ink-3: #d5e3ec;
+    --text: #0a1a22;
+    --muted: #59707d;
+    --glacier: #1a7d9c;
+    --line: rgba(10, 26, 34, 0.14);
+    --card: #f4f9fc;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.35s ease, color 0.35s ease;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ---------- 顶栏 ---------- */
+
+.top {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    padding: 0.95rem clamp(1.1rem, 4vw, 3.2rem);
+    background: var(--ink);
+    border-bottom: 1px solid var(--line);
+}
+
+.mark {
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+.mark em {
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--glacier);
+    margin-left: 0.5rem;
+}
+
+.top-nav {
+    display: flex;
+    gap: clamp(0.9rem, 2.6vw, 2.2rem);
+    font-size: 0.82rem;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+}
+
+.top-nav a {
+    padding: 0.2rem 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.top-nav a:hover {
+    color: var(--glacier);
+}
+
+.top-nav a[aria-current="page"] {
+    color: var(--text);
+    border-bottom-color: var(--glacier);
+}
+
+.theme {
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 0.76rem;
+    letter-spacing: 0.2em;
+    padding: 0.38rem 0.7rem;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.theme:hover {
+    color: var(--glacier);
+    border-color: var(--glacier);
+}
+
+/* ---------- 首屏 ---------- */
+
+.hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.hero img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 46%;
+}
+
+.veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(6, 14, 20, 0.28) 0%,
+        rgba(6, 14, 20, 0.06) 34%,
+        rgba(6, 14, 20, 0.80) 72%,
+        rgba(6, 14, 20, 0.99) 100%
+    );
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 2;
+    padding: 0 clamp(1.1rem, 5vw, 4rem) clamp(1.6rem, 5vh, 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    width: 100%;
+}
+
+.coord {
+    margin: 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.36em;
+    color: rgba(233, 241, 246, 0.72);
+    text-transform: uppercase;
+}
+
+.title {
+    margin: 0;
+    font-size: clamp(3rem, 12vw, 8.5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: #f5fafd;
+}
+
+.title span {
+    display: block;
+    font-size: clamp(0.78rem, 1.5vw, 1rem);
+    font-weight: 400;
+    letter-spacing: 0.42em;
+    color: var(--glacier);
+    margin-top: 0.8rem;
+    text-transform: uppercase;
+}
+
+.hero-sub {
+    margin: 0;
+    max-width: 46ch;
+    font-size: clamp(0.92rem, 1.5vw, 1.1rem);
+    color: rgba(233, 241, 246, 0.86);
+}
+
+/* ---------- 数字条 ---------- */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid var(--line);
+}
+
+.stat {
+    padding: clamp(1.6rem, 4vw, 2.6rem) clamp(1.1rem, 3vw, 2.4rem);
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stat:last-child {
+    border-right: none;
+}
+
+.stat b {
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--glacier);
+}
+
+.stat span {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* ---------- 入口 ---------- */
+
+.entries {
+    border-bottom: 1px solid var(--line);
+}
+
+.entry {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr auto;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.4rem);
+    padding: clamp(1.5rem, 4vw, 2.4rem) clamp(1.1rem, 4vw, 3.2rem);
+    border-bottom: 1px solid var(--line);
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.entry:last-child {
+    border-bottom: none;
+}
+
+.entry .num {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+}
+
+.entry h2 {
+    margin: 0;
+    font-size: clamp(1.5rem, 3.6vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.entry p {
+    margin: 0.35rem 0 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.entry .arrow {
+    font-size: 1.4rem;
+    color: var(--glacier);
+    transition: transform 0.25s ease;
+}
+
+.entry:hover {
+    background: var(--ink-2);
+}
+
+.entry:hover .arrow {
+    transform: translateX(6px);
+}
+
+/* ---------- 内页标题 ---------- */
+
+.page-head {
+    padding: clamp(2.4rem, 7vw, 4.6rem) clamp(1.1rem, 4vw, 3.2rem) clamp(1.6rem, 4vw, 2.6rem);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.eyebrow {
+    margin: 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.34em;
+    color: var(--glacier);
+    text-transform: uppercase;
+}
+
+.page-head h1 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 3.6rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.page-desc {
+    margin: 0;
+    max-width: 54ch;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* ---------- 景点网格 ---------- */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.card {
+    background: var(--card);
+    padding: clamp(1.3rem, 3.4vw, 2.2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    transition: background 0.25s ease;
+}
+
+.card:hover {
+    background: var(--ink-2);
+}
+
+.card .tag {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    letter-spacing: 0.24em;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+.card .tag b {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--glacier);
+}
+
+.card h3 {
+    margin: 0;
+    font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+    font-weight: 800;
+    letter-spacing: 0.01em;
+}
+
+.card p {
+    margin: 0;
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+/* ---------- 吃食行 ---------- */
+
+.rows {
+    border-bottom: 1px solid var(--line);
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 3.4rem minmax(6rem, 0.9fr) 1.6fr;
+    gap: clamp(1rem, 3vw, 2.2rem);
+    align-items: baseline;
+    padding: clamp(1.1rem, 3vw, 1.7rem) clamp(1.1rem, 4vw, 3.2rem);
+    border-top: 1px solid var(--line);
+    transition: background 0.22s ease, color 0.22s ease;
+}
+
+.row:first-child {
+    border-top: none;
+}
+
+.row .no {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+}
+
+.row .name {
+    font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+    font-weight: 800;
+}
+
+.row .desc {
+    font-size: 0.84rem;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.row:hover {
+    background: var(--glacier);
+    color: #08131a;
+}
+
+.row:hover .no,
+.row:hover .desc {
+    color: rgba(8, 19, 26, 0.72);
+}
+
+/* ---------- 月历 ---------- */
+
+.months {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.month {
+    background: var(--card);
+    padding: clamp(1.2rem, 3vw, 1.9rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-height: 11.5rem;
+    transition: background 0.25s ease;
+}
+
+.month:hover {
+    background: var(--ink-2);
+}
+
+.month .m {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--glacier);
+}
+
+.month .m i {
+    font-style: normal;
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    color: var(--muted);
+    margin-left: 0.35rem;
+}
+
+.month strong {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-top: 0.45rem;
+}
+
+.month p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+/* ---------- 尾注 ---------- */
+
+.tail {
+    padding: clamp(2rem, 5vw, 3.2rem) clamp(1.1rem, 4vw, 3.2rem);
+    font-size: 0.8rem;
+    color: var(--muted);
+    max-width: 62ch;
+}
+
+footer {
+    padding: 1.6rem clamp(1.1rem, 4vw, 3.2rem) 2.4rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+}
+
+/* ---------- 窄屏 ---------- */
+
+@media (max-width: 760px) {
+    .top {
+        flex-wrap: wrap;
+        gap: 0.6rem 0.9rem;
+        padding: 0.7rem 1rem 0.6rem;
+    }
+
+    .mark {
+        font-size: 0.8rem;
+        letter-spacing: 0.22em;
+    }
+
+    .theme {
+        margin-left: auto;
+    }
+
+    .top-nav {
+        order: 9;
+        width: 100%;
+        justify-content: center;
+        gap: 0.4rem 1.1rem;
+        font-size: 0.76rem;
+    }
+
+    .hero {
+        min-height: 76vh;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .stat {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .entry {
+        grid-template-columns: 2.6rem 1fr;
+        gap: 0.8rem;
+    }
+
+    .entry .arrow {
+        display: none;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .row {
+        grid-template-columns: 2.6rem 1fr;
+        gap: 0.2rem 0.9rem;
+    }
+
+    .row .desc {
+        grid-column: 2;
+    }
+
+    .months {
+        grid-template-columns: 1fr;
+    }
+
+    .month {
+        min-height: 0;
+    }
+}
